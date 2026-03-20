@@ -2,8 +2,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-let nextId = 1
-
 export const useWidgetStore = create(
   persist(
     (set) => ({
@@ -13,7 +11,7 @@ export const useWidgetStore = create(
           widgets: [
             ...s.widgets,
             {
-              id: `${type}-${nextId++}`,
+              id: `${type}-${crypto.randomUUID()}`,
               type,
               pos: { x: 80 + Math.random() * 200, y: 80 + Math.random() * 100 },
               size: { w: 320, h: 360 },
