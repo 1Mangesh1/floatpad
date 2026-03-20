@@ -16,6 +16,7 @@ export const useWidgetStore = create(
               pos: { x: 80 + Math.random() * 200, y: 80 + Math.random() * 100 },
               size: { w: 320, h: 360 },
               minimized: false,
+              zIndex: 0,
               data: {},
             },
           ],
@@ -36,6 +37,21 @@ export const useWidgetStore = create(
         set((s) => ({
           widgets: s.widgets.map((w) => (w.id === id ? { ...w, size } : w)),
         })),
+      resizeAndMove: (id, size, pos) =>
+        set((s) => ({
+          widgets: s.widgets.map((w) =>
+            w.id === id ? { ...w, size, pos } : w
+          ),
+        })),
+      bringToFront: (id) =>
+        set((s) => {
+          const maxZ = s.widgets.reduce((m, w) => Math.max(m, w.zIndex ?? 0), 0)
+          return {
+            widgets: s.widgets.map((w) =>
+              w.id === id ? { ...w, zIndex: maxZ + 1 } : w
+            ),
+          }
+        }),
       updateData: (id, data) =>
         set((s) => ({
           widgets: s.widgets.map((w) =>
