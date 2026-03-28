@@ -5,7 +5,6 @@ import { ParticleArt } from './ParticleArt'
 import { BeatPad } from './BeatPad'
 import { HabitTracker } from './HabitTracker'
 import { Inspiration } from './Inspiration'
-import { WebClipper } from './WebClipper'
 import { SketchPad } from './SketchPad'
 import { MiniSynth } from './MiniSynth'
 import { LavaLamp } from './LavaLamp'
@@ -21,7 +20,6 @@ export const REGISTRY = [
   { id: 'beatpad',     label: 'Beat Pad',     icon: '🎛️', w: 440, h: 360 },
   { id: 'habits',      label: 'Habits',       icon: '✅', w: 480, h: 400 },
   { id: 'inspiration', label: 'Inspiration',  icon: '💡', w: 360, h: 340 },
-  { id: 'webclipper',  label: 'Web Clipper',  icon: '🌐', w: 400, h: 420 },
   { id: 'sketchpad',   label: 'Sketch Pad',   icon: '🎨', w: 440, h: 400 },
   { id: 'minisynth',   label: 'Mini Synth',   icon: '🎹', w: 480, h: 300 },
   { id: 'lavalamp',    label: 'Lava Lamp',    icon: '🫧', w: 300, h: 400 },
@@ -38,7 +36,6 @@ const COMPONENTS = {
   beatpad: BeatPad,
   habits: HabitTracker,
   inspiration: Inspiration,
-  webclipper: WebClipper,
   sketchpad: SketchPad,
   minisynth: MiniSynth,
   lavalamp: LavaLamp,
