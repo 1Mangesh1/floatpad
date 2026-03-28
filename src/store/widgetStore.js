@@ -1,26 +1,30 @@
 // src/store/widgetStore.js
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { REGISTRY } from '../widgets/_registry'
 
 export const useWidgetStore = create(
   persist(
     (set) => ({
       widgets: [],
       spawn: (type) =>
-        set((s) => ({
-          widgets: [
-            ...s.widgets,
-            {
-              id: `${type}-${crypto.randomUUID()}`,
-              type,
-              pos: { x: 80 + Math.random() * 200, y: 80 + Math.random() * 100 },
-              size: { w: 320, h: 360 },
-              minimized: false,
-              zIndex: 0,
-              data: {},
-            },
-          ],
-        })),
+        set((s) => {
+          const reg = REGISTRY.find((r) => r.id === type)
+          return {
+            widgets: [
+              ...s.widgets,
+              {
+                id: `${type}-${crypto.randomUUID()}`,
+                type,
+                pos: { x: 80 + Math.random() * 200, y: 80 + Math.random() * 100 },
+                size: { w: reg?.w ?? 320, h: reg?.h ?? 360 },
+                minimized: false,
+                zIndex: 0,
+                data: {},
+              },
+            ],
+          }
+        }),
       close: (id) =>
         set((s) => ({ widgets: s.widgets.filter((w) => w.id !== id) })),
       minimize: (id) =>
